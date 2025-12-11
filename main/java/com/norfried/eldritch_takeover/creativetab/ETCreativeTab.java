@@ -6,10 +6,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-
+//
 public class ETCreativeTab extends CreativeTabs
 {
     public ETCreativeTab(String label) {super ("etcreativetab");
-    this.setBackgroundImageName("etcreativetab.png");}
+    this.setBackgroundImageName("etcreativetab.png");
+        }
     public ItemStack createIcon() {return new ItemStack(ItemInit.STRAULOK_INVOCATOR);}
 }
