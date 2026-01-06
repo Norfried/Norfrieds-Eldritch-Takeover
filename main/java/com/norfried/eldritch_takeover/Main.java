@@ -1,7 +1,8 @@
 package com.norfried.eldritch_takeover;
 
-import com.norfried.eldritch_takeover.proxy.CommonProxy;
 import com.norfried.eldritch_takeover.creativetab.ETCreativeTab;
+import com.norfried.eldritch_takeover.init.SmeltingInit;
+import com.norfried.eldritch_takeover.proxy.CommonProxy;
 import com.norfried.eldritch_takeover.util.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +33,7 @@ public class Main {
 
     @EventHandler
     public void init(FMLInitializationEvent e) {
-
+       SmeltingInit.init();
     }
 
     @EventHandler
