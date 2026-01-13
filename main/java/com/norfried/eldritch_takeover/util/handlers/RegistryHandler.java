@@ -8,12 +8,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemSlab;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
+
 
 @Mod.EventBusSubscriber
 public class RegistryHandler
@@ -22,12 +26,8 @@ public class RegistryHandler
     public static void onBlockRegister(RegistryEvent.Register<Block> event)
     {
         event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
-        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_SMOOTH_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
-        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_BRICK_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
-        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_TILE_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
     }
-
-    //
+    
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event)
     {
@@ -37,6 +37,7 @@ public class RegistryHandler
         event.getRegistry().register(new ItemBlockSlab(BlockInit.STRAULKITE_TILE_SLAB, BlockInit.STRAULKITE_TILE_SLAB, BlockInit.STRAULKITE_TILE_SLAB_DOUBLE).setRegistryName(BlockInit.STRAULKITE_TILE_SLAB.getRegistryName()));
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event)
     {
@@ -47,6 +48,9 @@ public class RegistryHandler
                 ((IHasModel)block).registerModels();
             }
         }
+        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_SMOOTH_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
+        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_BRICK_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
+        ModelLoader.setCustomStateMapper(BlockInit.STRAULKITE_TILE_SLAB_DOUBLE, new StateMap.Builder().ignore(BlockSlab.HALF).build());
 
         for(Item item : ItemInit.ITEMS)
         {
