@@ -1,6 +1,7 @@
 package com.norfried.eldritch_takeover.entity.living;
 
 
+import com.google.common.base.Predicate;
 import com.norfried.eldritch_takeover.entity.ai.EntityAIStraulokCrawlerLeap;
 import com.norfried.eldritch_takeover.util.handlers.LootTableHandler;
 import net.minecraft.entity.*;
@@ -14,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
@@ -36,10 +38,17 @@ public class EntityStraulokCrawler extends EntitySpider
     protected void initEntityAI()
     {
         super.initEntityAI();
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
-        this.targetTasks.addTask(7, new EntityStraulokCrawler.AIStraulokCrawlerHunt<>(this, EntityAnimal.class));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, 10, true, false, new Predicate<EntityIronGolem>()
+        {
+            public boolean apply(@Nullable EntityIronGolem p_apply_1_)
+            {
+                return p_apply_1_.isPlayerCreated();
+            }
+        }));
+        this.targetTasks.addTask(7, new EntityStraulokCrawler.AIStraulokCrawlerHunt<>(this, EntityVillager.class));
+        this.targetTasks.addTask(8, new EntityStraulokCrawler.AIStraulokCrawlerHunt<>(this, EntityAnimal.class));
         this.tasks.addTask(3, new EntityAIAvoidEntity<>(this, EntityEnderCrystal.class, 6.0F, 1.0D, 1.1D));
         this.tasks.addTask(2, new EntityAIStraulokCrawlerLeap(this, 2.0F));
     }
@@ -67,6 +76,14 @@ public class EntityStraulokCrawler extends EntitySpider
 
     public void onLivingUpdate()
     {
+        if (this.world.isRemote && !this.onGround)
+        {
+            for (int i = 0; i < 2; ++i)
+            {
+                this.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
+            }
+        }
+
         super.onLivingUpdate();
         if (isOverVoid(this.world, new BlockPos(this.posX, this.posY, this.posZ)) && !this.onGround && this.motionY < 0.0D)
         {
