@@ -22,9 +22,11 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class TileEntityStraulokPolyp extends TileEntityMobSpawner implements ITickable{
-    private final MobSpawnerBaseLogic spawnerLogic = new MobSpawnerBaseLogic() {
-        public void broadcastEvent(int id) {
+public class TileEntityStraulokPolyp extends TileEntity implements ITickable{
+    private final MobSpawnerBaseLogic spawnerLogic = new MobSpawnerBaseLogic()
+    {
+        public void broadcastEvent(int id)
+        {
             TileEntityStraulokPolyp.this.world.addBlockEvent(TileEntityStraulokPolyp.this.pos, BlockInit.STRAULOK_POLYP, id, 0);
         }
 
@@ -36,7 +38,8 @@ public class TileEntityStraulokPolyp extends TileEntityMobSpawner implements ITi
             return TileEntityStraulokPolyp.this.pos;
         }
 
-        public void setNextSpawnData(WeightedSpawnerEntity p_184993_1_) {
+        public void setNextSpawnData(WeightedSpawnerEntity p_184993_1_)
+        {
             super.setNextSpawnData(p_184993_1_);
             if (this.getSpawnerWorld() != null) {
                 IBlockState iblockstate = this.getSpawnerWorld().getBlockState(this.getSpawnerPosition());
@@ -48,23 +51,21 @@ public class TileEntityStraulokPolyp extends TileEntityMobSpawner implements ITi
 
 
     public static void registerFixesMobSpawner(DataFixer fixer) {
-        fixer.registerWalker(FixTypes.BLOCK_ENTITY, new IDataWalker() {
-            public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int versionIn) {
-                if (TileEntity.getKey(TileEntityStraulokPolyp.class).equals(new ResourceLocation(compound.getString("id")))) {
-                    if (compound.hasKey("SpawnPotentials", 9)) {
-                        NBTTagList nbttaglist = compound.getTagList("SpawnPotentials", 10);
+        fixer.registerWalker(FixTypes.BLOCK_ENTITY, (fixer1, compound, versionIn) -> {
+            if (TileEntity.getKey(TileEntityStraulokPolyp.class).equals(new ResourceLocation(compound.getString("id")))) {
+                if (compound.hasKey("SpawnPotentials", 9)) {
+                    NBTTagList nbttaglist = compound.getTagList("SpawnPotentials", 10);
 
-                        for(int i = 0; i < nbttaglist.tagCount(); ++i) {
-                            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
-                            nbttagcompound.setTag("Entity", fixer.process(FixTypes.ENTITY, nbttagcompound.getCompoundTag("Entity"), versionIn));
-                        }
+                    for(int i = 0; i < nbttaglist.tagCount(); ++i) {
+                        NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+                        nbttagcompound.setTag("Entity", fixer1.process(FixTypes.ENTITY, nbttagcompound.getCompoundTag("Entity"), versionIn));
                     }
-
-                    compound.setTag("SpawnData", fixer.process(FixTypes.ENTITY, compound.getCompoundTag("SpawnData"), versionIn));
                 }
 
-                return compound;
+                compound.setTag("SpawnData", fixer1.process(FixTypes.ENTITY, compound.getCompoundTag("SpawnData"), versionIn));
             }
+
+            return compound;
         });
     }
 
