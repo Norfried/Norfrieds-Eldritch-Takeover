@@ -3,6 +3,7 @@ package com.norfried.eldritch_takeover.init;
 import com.norfried.eldritch_takeover.Main;
 import com.norfried.eldritch_takeover.client.*;
 import com.norfried.eldritch_takeover.entity.living.*;
+import com.norfried.eldritch_takeover.entity.tile.TileEntityStraulokPolyp;
 import com.norfried.eldritch_takeover.util.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -11,6 +12,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import static net.minecraftforge.fml.client.registry.ClientRegistry.registerTileEntity;
+
 public class EntityInit
 {
     public static int id;
@@ -18,12 +21,15 @@ public class EntityInit
     public static void registerEntities()
     {
         registerEntity("straulok_crawler", EntityStraulokCrawler.class, ++id, 100, 3222845, 8133113);
+        registerEntity("straulok_scavenger", EntityStraulokScavenger.class, ++id, 100, 2893625, 8333153);
+        //registerTileEntity(TileEntityStraulokPolyp.class, 5);
     }
 
     @SideOnly(Side.CLIENT)
     public static void RegisterRenderers()
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityStraulokCrawler.class, RenderStraulokCrawler::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityStraulokScavenger.class, RenderStraulokScavenger::new);
     }
 
     private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2)

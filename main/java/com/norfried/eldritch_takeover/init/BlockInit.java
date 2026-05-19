@@ -1,18 +1,10 @@
 package com.norfried.eldritch_takeover.init;
 
-import com.norfried.eldritch_takeover.Main;
 import com.norfried.eldritch_takeover.block.*;
-import com.norfried.eldritch_takeover.item.ItemBlockSlab;
-import com.norfried.eldritch_takeover.util.handlers.ConfigHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +20,7 @@ public class BlockInit {
     public static final BlockSlab STRAULKITE_SMOOTH_SLAB_DOUBLE = new BlockSlabDoubleBase("straulkite_smooth_slab_double", STRAULKITE_SMOOTH_SLAB, Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
     public static final Block STRAULKITE_SMOOTH_WALL = new BlockWallBase("straulkite_smooth_wall", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
     public static final Block STRAULKITE_PILLAR = new BlockPillarBase("straulkite_pillar", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
+    public static final Block STRAULKITE_LANTERN = new BlockPillarBase("straulkite_lantern", Material.ROCK, 49.0F, 1199.0F, SoundType.STONE).setLightLevel(0.5F);
     public static final Block STRAULKITE_BRICK = new BlockBase("straulkite_brick", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
     public static final BlockStairBase STRAULKITE_BRICK_STAIRS = new BlockStairBase("straulkite_brick_stairs", STRAULKITE_BRICK.getDefaultState(), 50.0F, 1200.0F, SoundType.STONE);
     public static final BlockSlab STRAULKITE_BRICK_SLAB = new BlockSlabBase("straulkite_brick_slab", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
@@ -42,8 +35,12 @@ public class BlockInit {
     public static final Block STRAULKITE_TILE_WALL = new BlockWallBase("straulkite_tile_wall", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
     public static final Block STRAULKITE_TILE_CHISELED = new BlockBase("straulkite_tile_chiseled", Material.ROCK, 50.0F, 1200.0F, SoundType.STONE);
     public static final Block STRAULKITE_TILE_CRACKED = new BlockBase("straulkite_tile_cracked", Material.ROCK, 49.0F, 1199.0F, SoundType.STONE);
+    public static final Block FORMYTHID_STONE = new BlockBase("formythid_stone", Material.ROCK, 3.0F, 6.0F, SoundType.STONE);
     public static final Block FAR_REALM_MATTER = new BlockBase("far_realm_matter", Material.CORAL, 3.0F, 6.0F, SoundType.STONE);
-    public static final Block STRAULOK_BIOMASS = new BlockBase("straulok_biomass", Material.GOURD, 1.0F, 1.0F, SoundType.SLIME).setLightLevel(0.5F);
-    public static final Block STRAULOK_POLYP = new BlockStraulokPolyp("straulok_polyp", Material.GOURD).setHardness(1.0F).setResistance(1.0F).setLightLevel(0.5F);
+    public static final Block STRAULOK_BIOMASS = new BlockStraulokBiomass("straulok_biomass", Material.GOURD, 1.0F, 1.0F, SoundType.SLIME).setLightLevel(0.5F);
+    public static final Block STRAULOK_POLYP = new BlockStraulokPolyp("straulok_polyp", Material.GOURD, 1.0F, 1.0F, SoundType.SLIME).setLightLevel(0.5F);
 
+    //public static final Block ORE_OVERWORLD = new BlockRealmOre("ore_overworld", "overworld");
+    //public static final Block ORE_NETHER = new BlockRealmOre("ore_nether", "nether");
+    //public static final Block ORE_END = new BlockRealmOre("ore_end", "end");
 }
