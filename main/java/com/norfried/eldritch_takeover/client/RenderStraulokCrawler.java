@@ -18,7 +18,7 @@ public class RenderStraulokCrawler extends RenderLiving<EntityStraulokCrawler>
 
     public RenderStraulokCrawler(RenderManager renderManagerIn)
     {
-        super(renderManagerIn, new ModelSpider(), 1.0F);
+        super(renderManagerIn, new ModelSpider(), 1.2F);
         addLayer(new LayerStraulokCrawlerEyes(this));
     }
 
