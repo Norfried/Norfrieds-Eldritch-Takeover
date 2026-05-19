@@ -1,5 +1,6 @@
 package com.norfried.eldritch_takeover.proxy;
 
+//import com.norfried.eldritch_takeover.init.BiomeInit;
 import com.norfried.eldritch_takeover.init.EntityInit;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -14,6 +15,7 @@ public class CommonProxy
 
     public void preInitRegisteries(FMLPreInitializationEvent event)
     {
+        //BiomeInit.registerBiomes();
         EntityInit.registerEntities();
         //StraulokLootTables.registerLootTables();
         //StraulokSounds.registerSounds();
