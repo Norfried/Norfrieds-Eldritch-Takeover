@@ -1,5 +1,6 @@
 package com.norfried.eldritch_takeover.util.handlers;
 
+//import com.norfried.eldritch_takeover.init.BiomeInit;
 import com.norfried.eldritch_takeover.init.BlockInit;
 import com.norfried.eldritch_takeover.init.ItemInit;
 import com.norfried.eldritch_takeover.item.ItemBlockSlab;
@@ -31,10 +32,10 @@ public class RegistryHandler
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
         event.getRegistry().register(new ItemBlockSlab(BlockInit.STRAULKITE_SMOOTH_SLAB, BlockInit.STRAULKITE_SMOOTH_SLAB, BlockInit.STRAULKITE_SMOOTH_SLAB_DOUBLE).setRegistryName(BlockInit.STRAULKITE_SMOOTH_SLAB.getRegistryName()));
         event.getRegistry().register(new ItemBlockSlab(BlockInit.STRAULKITE_BRICK_SLAB, BlockInit.STRAULKITE_BRICK_SLAB, BlockInit.STRAULKITE_BRICK_SLAB_DOUBLE).setRegistryName(BlockInit.STRAULKITE_BRICK_SLAB.getRegistryName()));
         event.getRegistry().register(new ItemBlockSlab(BlockInit.STRAULKITE_TILE_SLAB, BlockInit.STRAULKITE_TILE_SLAB, BlockInit.STRAULKITE_TILE_SLAB_DOUBLE).setRegistryName(BlockInit.STRAULKITE_TILE_SLAB.getRegistryName()));
+        event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
     }
 
     @SideOnly(Side.CLIENT)
@@ -60,4 +61,9 @@ public class RegistryHandler
             }
         }
     }
+
+    //public static void otherRegistries()
+    //{
+        //BiomeInit.registerBiomes();
+    //}
 }

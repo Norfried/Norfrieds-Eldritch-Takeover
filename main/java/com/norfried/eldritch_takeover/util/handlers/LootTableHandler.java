@@ -7,4 +7,5 @@ import net.minecraft.world.storage.loot.LootTableList;
 public class LootTableHandler
 {
     public static final ResourceLocation STRAULOKCRAWLER = LootTableList.register(new ResourceLocation(Reference.MODID, "straulok_crawler"));
+    public static final ResourceLocation STRAULOKSCAVENGER = LootTableList.register(new ResourceLocation(Reference.MODID, "straulok_scavenger"));
 }
