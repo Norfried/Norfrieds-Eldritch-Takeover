@@ -1,6 +1,6 @@
 ---
 name: Suggestion
-about: Suggest an idea for this mod
+about: Suggest an idea or improvement for this mod
 title: "[SUGGESTION]"
 labels: ''
 assignees: ''
